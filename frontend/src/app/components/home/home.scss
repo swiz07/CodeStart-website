@@ -1,0 +1,188 @@
+@use "sass:math";
+@use "sass:list";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:host {
+    --home-primary-color: #a69bce;
+    --home-seconday-color: #4130b2;
+    --text-color: #fff;
+}
+
+body {
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.parallax {
+    position: relative;
+    height: 80vh;
+    overflow: hidden;
+}
+
+#text {
+    position: absolute;
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.parallax img {
+    position: absolute;
+    width: 300px;
+    pointer-events: none;
+    will-change: transform;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(5px 12px 2px rgba(0, 0, 0, 0.25));
+}
+
+.background {
+    background: #3f3859;
+    color: white;
+    font-family: "Roboto Serif", cursive;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+$particleSize: 20px;
+$animationDuration: 6s;
+$amount: 20;
+
+.background span {
+    width: $particleSize;
+    height: $particleSize;
+    border-radius: $particleSize;
+    backface-visibility: hidden;
+    position: absolute;
+    animation-name: move;
+    animation-duration: $animationDuration;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    $colors: (
+        #fbfcca,
+        #d7f3fe,
+        #ffd0a7
+    );
+
+@for $i from 1 through $amount {
+    &:nth-child(#{$i}) {
+        color: list.nth($colors, math.random(list.length($colors)));
+        top: math.random(100) * 1%;
+        left: math.random(100) * 1%;
+        animation-duration: math.div(math.random(math.div($animationDuration,1s)* 10),10) * 1s + 10s;
+        animation-delay: math.div(math.random(math.div($animationDuration + 10s,1s) * 10), 10) * -1s;
+        transform-origin: (math.random(50) - 25) * 1vw (math.random(50) - 25) * 1vh;
+        $blurRadius: (
+            math.random() + 0) * $particleSize * 0.2;
+        $x: if(math.random() > 0.5, -1, 1
+        );
+    box-shadow: ($particleSize * 2 * $x) 0 $blurRadius currentColor;
+}
+}
+}
+
+@keyframes move {
+    100% {
+        transform: translate3d(0, 0, 1px) rotate(360deg);
+    }
+}
+
+.sec {
+    position: relative;
+    background-color: var(--home-seconday-color);
+    padding: 100px;
+}
+
+.sec h2 {
+    font-size: 3em;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.sec p {
+    font-size: 1.4em;
+    color: var(--text-color);
+    font-weight: 300;
+}
+
+.learn-method .row {
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.learn-method .col {
+    background-color: var(--home-primary-color);
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.learn-method .col>p {
+    color: #000;
+}
+
+.learn-card:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.available-course {
+    text-align: center;
+    background-color: var(--home-primary-color);
+}
+
+.available-course h2 {
+    color: #3d2e8f;
+    margin-bottom: 20px;
+    padding-top: 30px;
+}
+
+.available-course .row {
+    gap: 15px;
+    margin: 10px;
+    justify-content: center;
+}
+
+.available-course .col-md-3 {
+    background-color: #cecece;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.available-card:hover{
+    transform: scale(1.1);
+}
+
+button {
+    background-color: var(--home-seconday-color);
+    color: var(--text-color);
+    padding: 10px;
+    border: 0px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+button:hover {
+    background-color: #5c47d1;
+}
+
+.signup {
+    text-align: center;
+    background-color: var(--home-primary-color);
+    border-top: 2px solid rgba($color: #000000, $alpha: 0.24);
+}
+
+.signup h3 {
+    color: #3a2b9a;
+    padding: 20px 10px;
+}

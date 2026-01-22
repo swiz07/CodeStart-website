@@ -1,0 +1,39 @@
+.logo-text{
+    color:#5946c6;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    margin: 0;
+}
+
+.logo-text:hover{
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.navbar-links{
+    font-family: sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.right-nav-links .login{
+    border: 1px solid #5946c6;
+    padding: 0px 14px;
+    font-size: 1.2rem;
+}
+
+.right-nav-links .login:hover{
+    background-color: rgba(89, 70, 198, 0.3);
+}
+
+.right-nav-links .signup{
+    background-color: #4e3db4;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.right-nav-links .signup:hover{
+    background-color: #7164c7;
+}

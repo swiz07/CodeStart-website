@@ -1,0 +1,44 @@
+section .login {
+    background-color: #694DDE;
+}
+
+.login form {
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+}
+
+.login input {
+    background-color: #EDEDED;
+    border-radius: 0;
+}
+
+.login input:focus {
+    outline: none;
+}
+
+.login .btn {
+    font-weight: bolder;
+    background-color: #452AB3;
+}
+
+.login .btn:hover {
+    font-weight: bolder;
+    background-color: #452ab3c6;
+}
+
+.email {
+    background-image: url('/assets/images/user.png');
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    background-position: 10px center;
+    padding-left: 37px;
+}
+
+.password{
+    background-image: url('/assets/images/padlock.png');
+    background-repeat: no-repeat;
+    background-size: 21px 21px;
+    background-position: 10px center;
+    padding-left: 37px;
+  }

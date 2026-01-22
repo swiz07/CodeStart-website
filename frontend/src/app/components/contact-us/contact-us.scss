@@ -1,0 +1,32 @@
+#contact-us h3{
+    color: #4E3DB4;
+    font-weight: bolder;
+}
+
+#contact-us label{
+    color:#8579AD;
+}
+
+#contact-us input, textarea{
+    background-color:#E8E1FF;
+    border-radius: 10px;
+}
+
+textarea:focus{
+ background-color:#E8E1FF;
+}
+
+.contact-btn {
+    background-color: #A5ADFE;
+    color:white;
+}
+
+.contact-btn:hover{
+    background-color: #5e65b7;
+}
+
+#contact-us .right-image{
+    width: 450px;
+    max-width: 100%;
+    height: auto;
+}

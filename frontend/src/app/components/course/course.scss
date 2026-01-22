@@ -1,0 +1,54 @@
+.course-desc{
+    background-color: #DCD1FF;
+    padding: 60px;
+}
+
+#level{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.category-box, .level-box{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding:3px 12px;
+    border-radius: 10px;
+    background-color: #D9D9D9;
+}
+
+.level-box{
+    width: 200px;
+}
+
+.icon-btn{
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#searchbar button,#searchbar input{
+    border: none;
+    background: none;
+}
+
+#searchbar{
+    background-color: #D9D9D9;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding:10px 12px;
+    border-radius: 10px;
+    width: 250px;
+}
+
+#searchbar input{
+    flex: 1;
+}
+
+.level-text,.category-text{
+    cursor:default;
+}

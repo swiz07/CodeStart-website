@@ -1,0 +1,24 @@
+:host{
+    --text-color:white;
+    --background-color:rgba(0, 0, 0, 0.751);
+}
+
+*{
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+
+.footer, .footer a{
+    color: var(--text-color);
+}
+
+.footer{
+    background-color: var(--background-color);
+}
+
+.footer .nav-link:hover{
+    color: rgba(255, 255, 255, 0.646);
+}
+
