@@ -25,10 +25,10 @@
                         <label for="email">Email address</label>
                         <input type="email" class="form-control" id="email" placeholder="name@gmail.com" maxlength="50"
                             aria-label="Email address" required formControlName="email">
-                            <div class="text-danger" *ngIf="email?.invalid && email?.touched">
-                                <div *ngIf="email?.errors?.['required']">Email is required.</div>
-                                <div *ngIf="email?.errors?.['email']">Enter a valid email.</div>
-                            </div>
+                        <div class="text-danger" *ngIf="email?.invalid && email?.touched">
+                            <div *ngIf="email?.errors?.['required']">Email is required.</div>
+                            <div *ngIf="email?.errors?.['email']">Enter a valid email.</div>
+                        </div>
                     </div>
 
                     <!--Message textarea-->
@@ -36,12 +36,12 @@
                         <label for="message">Message</label>
                         <textarea class="form-control" id="message" rows="3" placeholder="Write your message here...."
                             required aria-label="Message" formControlName="message"></textarea>
-                            <div class="text-danger" *ngIf="message?.invalid && message?.touched">
-                                <div *ngIf="message?.errors?.['required']">Message is required.</div>
-                            </div>
+                        <div class="text-danger" *ngIf="message?.invalid && message?.touched">
+                            <div *ngIf="message?.errors?.['required']">Message is required.</div>
+                        </div>
                     </div>
 
-                    
+
 
                     <!--submit button-->
                     <button type="submit" class="btn mb-4 contact-btn" [disabled]="contactForm.invalid">Submit</button>
