@@ -7,34 +7,80 @@
         </div>
 
         <!--Signup form-->
-        <form>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
             <!--Full name input field-->
             <div class="form-group">
                 <label for="fullname">Full Name:</label>
-                <input type="text" class="form-control mb-4" id="fullname" placeholder="Full Name" required>
+                <input type="text" class="form-control mb-3" id="fullname" placeholder="Full Name"
+                    formControlName="fullname">
+            </div>
+
+            <!--Full name validation-->
+            <div *ngIf="fullname?.touched && fullname?.invalid" class="text-danger">
+                <p *ngIf="fullname?.hasError('required')">Full name is required</p>
+                <p *ngIf="fullname?.hasError('minlength')">Minimum 3 characters</p>
+                <p *ngIf="fullname?.hasError('pattern')">Only letters and spaces allowed</p>
             </div>
 
             <!--email input field-->
             <div class="form-group">
                 <label for="email">Email address:</label>
-                <input type="email" class="form-control mb-4" id="email" placeholder="Email address" required>
+                <input type="email" class="form-control mb-3" id="email" placeholder="Email address"
+                    formControlName="email">
+            </div>
+
+            <!--email validation-->
+            <div *ngIf="email?.touched && email?.invalid" class="text-danger">
+                <p *ngIf="email?.hasError('required')">Email is required</p>
+                <p *ngIf="email?.hasError('email')">Enter a valid email address</p>
             </div>
 
             <!--password input field-->
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control mb-4" id="password" placeholder="Password" required>
+                <input type="password" class="form-control mb-3" id="password" placeholder="Password"
+                    formControlName="password">
+            </div>
+
+            <!-- Error messages for password field -->
+            <div class="text-danger">
+                <div *ngIf="hasError('password', 'required')">
+                    <p>Password is required</p>
+                </div>
+                <div *ngIf="hasError('password', 'minlength')">
+                    <p>Password must be at least 8 characters long</p>
+                </div>
+                <div *ngIf="hasError('password', 'uppercase')">
+                    <p>
+                        Password must contain at least one uppercase letter
+                    </p>
+                </div>
+                <div *ngIf="hasError('password', 'number')">
+                    <p>Password must contain at least one number</p>
+                </div>
+                <div *ngIf="hasError('password', 'specialCharacter')">
+                    <p>
+                        Password must contain at least one special character
+                    </p>
+                </div>
             </div>
 
             <!--Confirm password input field-->
             <div class="form-group">
                 <label for="confirmpassword">Confirm Password</label>
-                <input type="password" class="form-control mb-4" id="confirmpassword" placeholder="Confirm Password" required>
+                <input type="password" class="form-control mb-3" id="confirmpassword" placeholder="Confirm Password"
+                    formControlName="confirmPassword">
+            </div>
+
+            <!-- Error messages for confirm password field -->
+            <div *ngIf="signupForm.errors?.['passwordMismatch'] && signupForm.get('confirmPassword')?.touched">
+                <p class="text-danger">Passwords do not match!</p>
             </div>
 
             <div class="text-center mb-3">
                 <!--Submit btn for creating an account-->
-                <button type="submit" class="btn mx-auto mb-2">Create account</button><br>
+                <button type="submit" class="btn mx-auto mb-2" [disabled]="signupForm.invalid">Create
+                    account</button><br>
 
                 <!--text and link for users who already have an account-->
                 <p class="d-inline">Already have an account?</p> <a class="ms-2" routerLink="/login">Sign in here</a>

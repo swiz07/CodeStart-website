@@ -1,4 +1,5 @@
 <!--Login form section-->
+<!--Reference for customised validation: https://www.geeksforgeeks.org/angular-js/angular-confirm-password-validation-using-custom-validators/-->
 <section>
     <div class="login">
         <div class="d-flex justify-content-center align-items-center">
@@ -26,7 +27,21 @@
 
                     <!--Validation errors for Password-->
                     <div class="text-danger" *ngIf="password?.invalid && password?.touched">
-                        <div *ngIf="password?.errors?.['required']">Password is required.</div>
+                        <div *ngIf="password?.errors?.['required']">
+                            Password is required
+                        </div>
+                        <div *ngIf="password?.errors?.['minlength']">
+                            Password must be at least 8 characters long
+                        </div>
+                        <div *ngIf="password?.errors?.['uppercase']">
+                            Password must contain at least one uppercase letter
+                        </div>
+                        <div *ngIf="password?.errors?.['number']">
+                            Password must contain at least one number
+                        </div>
+                        <div *ngIf="password?.errors?.['specialCharacter']">
+                            Password must contain at least one special character
+                        </div>
                     </div>
                 </div>
 
