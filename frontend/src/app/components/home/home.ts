@@ -1,14 +1,18 @@
 import { Component, HostListener, ElementRef, ViewChild } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Route, Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../service/auth-service';
 
 /*https://www.youtube.com/watch?v=kmM6mqvnxcs*/
 @Component({
   selector: 'app-home',
+  standalone:true,
   imports: [RouterModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home {
+  user:any;
+  isLoggedIn:boolean=false;
   @ViewChild('text') text!: ElementRef;
   @ViewChild('book') book!: ElementRef;
   @ViewChild('parallax') parallax!: ElementRef;
@@ -23,7 +27,31 @@ export class Home {
     this.text.nativeElement.style.transform =
       `translate(-50%, ${value * 2.5}px)`;
   }
+
+  constructor(private authService:AuthService, private router:Router){
+
+  }
+  
+
+  ngOnInit(){
+    this.authService.getUser().subscribe({
+      next:(data)=>{
+        console.log(data);
+        if(data.status==='Success'){
+          this.isLoggedIn=true;
+          this.user=data.data
+        }
+      },
+      error:(err)=>{
+        console.log(err);
+        this.isLoggedIn=false;
+      }
+    })
+  }
+  
 }
+
+
 
 
 

@@ -1,71 +1,55 @@
 import { Component } from '@angular/core';
-import { Validators, FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Validators, FormGroup, FormControl, FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AbstractControl } from '@angular/forms';
+import { AuthService } from '../../service/auth-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(32),
-      this.hasUppercase,
-      this.hasNumber,
-      this.hasSpecialCharacter,]),
-  });
+  loginForm: FormGroup;
+
+  constructor(private fb: FormBuilder, private authService: AuthService, private router:Router) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(32),]],
+    })
+  };
 
   get email() {
-    return this.loginForm.get('email');
-  }
+      return this.loginForm.get('email');
+    }
 
   get password() {
-    return this.loginForm.get('password');
-  }
-
-  // Custom validator to check if the password contains at least one uppercase letter
-  hasUppercase(control: AbstractControl) {
-    const value = control.value;
-    if (value && !/[A-Z]/.test(value)) {
-      return { uppercase: true };
+      return this.loginForm.get('password');
     }
-    return null;
-  }
 
-  // Custom validator to check if the password contains at least one number
-  hasNumber(control: AbstractControl) {
-    const value = control.value;
-    if (value && !/\d/.test(value)) {
-      return { number: true };
+    loginSuccess = false;
+
+    // Form Submit
+    onSubmit() {
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (data) => {
+          console.log('Backend message', data);
+          if(data.status==="Success"){
+            this.authService.setUser(data.user)
+            this.router.navigate(["/home"])
+          }
+          this.loginForm.reset();
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
     }
-    return null;
+
   }
-
-  // Custom validator to check if the password contains at least one special character
-  hasSpecialCharacter(control: AbstractControl) {
-    const value = control.value;
-    if (value && !/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
-      return { specialCharacter: true };
-    }
-    return null;
-  }
-
-  loginSuccess = false;
-
-  // Form Submit
-  onSubmit() {
-    if (this.loginForm.valid) {
-        alert(`Form Submitted Successfully`);
-        this.loginForm.reset();
-    } else {
-        alert('Please check the form for errors');
-    }
-} 
-
-}

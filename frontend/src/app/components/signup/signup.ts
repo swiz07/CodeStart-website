@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, AbstractControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../service/auth-service';
 
 @Component({
     selector: 'app-signup',
+    standalone: true,
     imports: [CommonModule, ReactiveFormsModule],
     templateUrl: './signup.html',
     styleUrl: './signup.scss',
@@ -11,7 +13,7 @@ import { ReactiveFormsModule, AbstractControl, FormGroup, FormBuilder, Validator
 export class Signup {
     signupForm: FormGroup;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private authService: AuthService) {
         this.signupForm = this.fb.group(
             {
                 password: [
@@ -31,13 +33,13 @@ export class Signup {
                     [
                         Validators.required,
                         Validators.minLength(3),
-                        Validators.pattern(/^[a-zA-Z]+$/),
                     ],
                 ],
 
             },
             { validators: this.passwordMatchValidator }
         );
+
     }
 
     // Custom validator to check if passwords match
@@ -97,8 +99,23 @@ export class Signup {
     // Form Submit
     onSubmit() {
         if (this.signupForm.valid) {
-            alert(`Form Submitted Successfully`);
-            this.signupForm.reset();
+            const formValue = {
+                full_name: this.signupForm.value.fullname,
+                email: this.signupForm.value.email,
+                password: this.signupForm.value.password
+            };
+
+            this.authService.signup(formValue).subscribe({
+                next: (data) => {
+                    console.log('Backend message', data);
+                    alert('Form submitted successfully');
+                    this.signupForm.reset();
+                },
+                error: (err) => {
+                    console.log(err)
+                    console.log('Something went wrong');
+                }
+            })
         } else {
             alert('Please check the form for errors');
         }

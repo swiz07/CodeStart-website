@@ -1,3 +1,4 @@
+<!--reference https://www.youtube.com/playlist?list=PLS3Cbnye46mt-r5_XIQG-7SeVF60aE2yp-->
 <section class="d-flex justify-content-center align-items-center signup">
     <div>
         <div class="text-center">
@@ -19,7 +20,6 @@
             <div *ngIf="fullname?.touched && fullname?.invalid" class="text-danger">
                 <p *ngIf="fullname?.hasError('required')">Full name is required</p>
                 <p *ngIf="fullname?.hasError('minlength')">Minimum 3 characters</p>
-                <p *ngIf="fullname?.hasError('pattern')">Only letters and spaces allowed</p>
             </div>
 
             <!--email input field-->

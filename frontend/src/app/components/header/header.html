@@ -24,13 +24,25 @@
             <li class="nav-item">
               <a class="me-lg-4 nav-link" routerLink="/contact">Contact</a>
             </li>
+            <li class="nav-item" *ngIf="isLoggedIn">
+              <a class="me-lg-4 nav-link" routerLink="/dashboard">Dashboard</a>
+            </li>
           </ul>
         </div>
 
         <!--Right aligned nav links for login & signup-->
         <div class="d-flex right-nav-links">
-          <button class="btn me-lg-4 login" routerLink="/login">Login</button>
-          <button class="btn signup" routerLink="/signup">Signup</button>
+          <!--show login & signup only if Not logged in-->
+          <button *ngIf="!isLoggedIn" class="btn me-lg-4 login" routerLink="/login">Login</button>
+          <button *ngIf="!isLoggedIn" class="btn signup" routerLink="/signup">Signup</button>
+
+          <!--show logout if logged in-->
+          <button *ngIf="isLoggedIn" (click)="logout()" class="btn me-lg-4 logout">Logout </button>
+
+          <!--profile btn with pic-->
+          <button *ngIf="isLoggedIn" (click)="goProfile()" class="profile-btn">
+            <img src="assets/images/user.png" alt="Profile" class="profile-pic"/>
+          </button>
         </div>
       </div>
     </div>
