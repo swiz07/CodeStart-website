@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, take, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { ProfileService } from '../../service/profile-service';
+import { ProfileService } from '../../service/profile-service/profile-service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 

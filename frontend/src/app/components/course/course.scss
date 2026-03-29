@@ -1,3 +1,9 @@
+:host {
+    --home-primary-color: #a69bce;
+    --home-seconday-color: #4130b2;
+    --text-color: #fff;
+}
+
 .course-desc{
     background-color: #DCD1FF;
     padding: 60px;
@@ -51,4 +57,28 @@
 
 .level-text,.category-text{
     cursor:default;
+}
+
+.available-course h2 {
+    color: #3d2e8f;
+    margin-bottom: 20px;
+    padding-top: 30px;
+}
+.result-coursework .available-card{
+    border: 1px solid black;
+    text-align: center;
+    width: 20%;
+}
+
+.btn-start {
+    background-color: var(--home-seconday-color);
+    color: var(--text-color);
+    padding: 10px;
+    border: 0px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.btn-start:hover {
+    background-color: #5c47d1;
 }

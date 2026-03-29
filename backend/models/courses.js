@@ -20,8 +20,8 @@ const courseSchema = new mongoose.Schema({
     },
     difficulty_level: {
         type: String,
-        enum:["beginner", "intermediate", "advanced"],
-        default: "beginner"
+        enum:["Beginner", "Intermediate", "Advanced"],
+        default: "Beginner"
     },
     lessons:[{
         type:mongoose.Schema.Types.ObjectId,

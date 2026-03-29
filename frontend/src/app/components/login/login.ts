@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Validators, FormGroup, FormControl, FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AbstractControl } from '@angular/forms';
-import { AuthService } from '../../service/auth-service';
+import { AuthService } from '../../service/auth-service/auth-service';
 import { Router } from '@angular/router';
 
 @Component({

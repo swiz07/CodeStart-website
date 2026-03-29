@@ -44,6 +44,18 @@
 
     <!--Displays search results or courses-->
     <div class="result-coursework">
-
+        <div class="row d-flex justify-content-center">
+            <!--Available course card-->
+            <div class="col-md-3 m-auto available-card mb-5 mt-4" *ngFor="let course of courses">
+                <img src="" alt="">
+                <h4>{{course.title}}</h4>
+                <h5>{{course.difficulty_level}}</h5>
+                <h5 class="mt-4">{{course.language}}</h5>
+                <p>{{course.description}}</p>
+                <span style="margin-right: 15px;">Lessons: {{course.lessons.length}}</span>
+                <span>Duration: {{course.course_duration}}hrs</span><br>
+                <button class="btn-start">Start learning</button>
+            </div>
+        </div>
     </div>
 </section>

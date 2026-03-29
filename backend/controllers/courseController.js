@@ -17,15 +17,18 @@ exports.getCourses = async (req, res) => {
 exports.createCourses = async (req, res) => {
     try {
         const { title, course_image, description, category, language, difficulty_level, course_duration, students_enrolled } = req.body;
+        //checks if the fields are empty 
         if (!title || !description || !category || !course_duration) {
             return res.status(400).json({ message: "Required fields missing" })
         }
         const existingCourse = await Course.findOne({ title });
 
+        //checks if the course exists 
         if (existingCourse) {
             return res.status(400).json({ msg: "Course already exists" });
         }
 
+        //if course does not exists it creates new course
         const newCourse = new Course({
             title,
             course_image,
@@ -53,6 +56,7 @@ exports.updateCourse = async (req, res) => {
             { new: true }
         )
 
+        //if course not found
         if (!updatedCourse) {
             return res.status(404).json({ msg: "Course not found" });
         }
@@ -67,9 +71,9 @@ exports.updateCourse = async (req, res) => {
 exports.deleteCourse = async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await Course.findByIdAndDelete(id)
+        const deleted = await Course.findByIdAndDelete(id)
 
-        if (!result) {
+        if (!deleted) {
             return res.status(404).json({ msg: "Course not found" });
         }
         res.status(200).json({ msg: 'Course deleted successfully', result })
@@ -125,8 +129,9 @@ exports.addLesson = async (req, res) => {
         await lesson.save();
 
         //attach lesson to course
-        existingCourse.lesson.push(lesson._id);
+        existingCourse.lessons.push(lesson._id);
         await course.save()
+
         res.status(201).json({ msg: 'Lesson added successfully', lesson, course })
     }
     catch (err) {
@@ -168,4 +173,5 @@ exports.addQuiz = async (req, res) => {
     catch (err) {
         res.status(500).json({ msg: 'Internal Server Error!' })
     }
+    
 }

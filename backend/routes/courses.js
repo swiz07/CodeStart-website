@@ -1,6 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const coursesController = require('../controllers/courseController');
+const enrollmentController=require('../controllers/enrollment')
 
 //courses
 
@@ -20,7 +21,6 @@ router.put("/:id",coursesController.updateCourse);
 router.delete("/:id",coursesController.deleteCourse);
 
 //lessons:
-
 //add a lesson to a course
 router.post("/:id/lessons", coursesController.addLesson)
 
@@ -28,5 +28,7 @@ router.post("/:id/lessons", coursesController.addLesson)
 
 //add a quiz to a course
 router.post("/:id/quizzes", coursesController.addQuiz);
+
+router.post("/:id/enroll", enrollmentController.enrollInCourse)
 
 module.exports=router;

@@ -153,10 +153,12 @@ $amount: 20;
     justify-content: center;
 }
 
-.available-course .col-md-3 {
+.available-course .available-card {
     background-color: #cecece;
     padding: 10px;
     border-radius: 10px;
+    width: 20%;
+    border: 1px solid black;
 }
 
 .available-card:hover{
