@@ -1,0 +1,63 @@
+<section *ngIf="user$ | async as user">
+    <div id="profile-card">
+        <div class="profile-header">
+            <div class="profile-image">
+
+                <!--Display profile picture as default if not available-->
+                <img [src]="user.profile_pic || defaultImage" alt="profile" class="profile-pic">
+            </div>
+            <p class="name"> {{user.full_name}}</p>
+        </div>
+        <div class="profile-body">
+            <!--Profile information-->
+            <div class="info" *ngIf="!editMode">
+                <h3>About me</h3>
+                <p><span> {{user.bio || 'No bio available'}}</span></p>
+
+                <h3>Contact</h3>
+                <p><span>Email address:</span><span> {{user.email}}</span></p>
+
+                <p><span>Full name:</span><span> {{user.full_name}}</span></p>
+
+                <p><span>Role:</span> {{user.role}}</p>
+
+                <p><span>Member since:</span> {{user.registration_date |date:'mediumDate'}}</p>
+            </div>
+
+            <!--Profile edit form (only visible when editmode is true)-->
+            <div *ngIf="editMode">
+                <form (ngSubmit)="onSaveProfile()">
+                    <div>
+                        <label for="name">Full name:</label>
+                        <input type="text" id="name" [(ngModel)]="updatedUser.full_name" name="full_name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" [(ngModel)]="updatedUser.email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="bio">About me:</label>
+                        <textarea id="bio" [(ngModel)]="updatedUser.bio" name="bio" required></textarea>
+                    </div>
+                    <div>
+                        <label for="profile_pic">Profile Pic URL:</label>
+                        <input type="text" id="profile_pic" [(ngModel)]="updatedUser.profile_pic" name="profile_pic">
+                    </div>
+
+                    <!--Save or cancel buttons-->
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="save-btn">Save</button>
+                        <button type="button" class="cancel-btn" (click)="onCancelEdit()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!--displays edit button when not in edit mode-->
+            <div *ngIf="!editMode" class="d-flex justify-content-center align-items-center">
+            <button class="edit-btn" (click)="onEditProfile()">
+                <img src="assets/images/edit_btn.png" alt="edit profile">
+            </button>
+        </div>
+        </div>
+    </div>
+</section>

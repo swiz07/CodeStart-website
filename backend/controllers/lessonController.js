@@ -2,6 +2,9 @@ const lessons = require('../models/lessons');
 const Lesson = require('../models/lessons')
 const Progress=require('../models/progress')
 
+//create lesson
+
+
 //get lesson by id
 exports.getLessonById = async (req, res) => {
      try {

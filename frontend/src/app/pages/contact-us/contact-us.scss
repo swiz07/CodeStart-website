@@ -1,0 +1,69 @@
+//Contact section heading
+#contact-us h3{
+    color: #4E3DB4;
+    font-weight: bolder;
+}
+
+//form labels styling
+#contact-us label{
+    color:#8579AD;
+}
+
+//input and textarea field styling
+#contact-us input, textarea{
+    background-color:#E8E1FF;
+    border-radius: 10px;
+}
+
+textarea:focus{
+ background-color:#E8E1FF;
+}
+
+//submit button styling
+.contact-btn {
+    background-color: #A5ADFE;
+    color:white;
+}
+
+.contact-btn:hover{
+    background-color: #5e65b7;
+}
+
+//right side contact image styling
+#contact-us .right-image{
+    width: 450px;
+    max-width: 100%;
+    height: auto;
+}
+
+//styles for mobile
+@media (max-width:768px) {
+    .contact-btn{
+        width: 100%;
+    }
+
+    #contact-us .right-image{
+        width: 280px;
+        margin-top: 20px;
+    }
+
+    #contact-us .row{
+        gap:20px;
+    }
+
+
+    #contact-us input,
+    #contact-us textarea{
+        width: 80%;
+        padding:10px 12px;
+        border: none;
+        border-radius:10px;
+        height:45px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    #contact-us textarea{
+        min-height: 120px;
+    }
+}

@@ -1,0 +1,23 @@
+<div *ngIf="loading" class="text-center my-4">
+    Loading blogs...
+  </div>
+  
+  <div class="d-flex flex-wrap gap-3" *ngIf="!loading && blogs.length > 0">
+    <div *ngFor="let blog of blogs" class="card" style="width: 18rem;">
+      <img 
+        class="card-img-top" 
+        [src]="blog.coverImage || 'https://img.icons8.com/?size=128&id=x3LcjPtwGQWX&format=png'" 
+        alt="{{ blog.title }}"
+      >
+      <div class="card-body">
+        <span class="badge bg-secondary mb-1">{{ blog.category }}</span>
+        <h5 class="card-title">{{ blog.title }}</h5>
+        <p class="card-text">{{ blog.content | slice:0:100 }}...</p>
+        <a [routerLink]="['/blog', blog._id]" class="btn btn-primary">Read more</a>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!loading && blogs.length === 0" class="text-center my-4">
+    No blogs found.
+  </div>

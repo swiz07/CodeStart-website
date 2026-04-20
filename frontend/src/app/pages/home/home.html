@@ -1,0 +1,83 @@
+<!--Parallax scrolling-->
+<!--Reference:https://youtu.be/kmM6mqvnxcs?si=CJc5UZQrBHV8l7ti-->
+<!--This parallax effect is inspired by the tutorial from youtube (link above) which creates a dynamic background-->
+
+<!--Reference: https://prismic.io/blog/css-background-effects -->
+<!--floating balls effect used to add dynamic and engaging background motion, , making the page more visually engaging-->
+<section class="parallax background" #parallax>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <img src="assets/images/book.png" alt="book" id="book" #book>
+    <h3 id="text" #text>Learn, Grow, Succeed.</h3>
+</section>
+
+<!--why choose codestart section-->
+<section class="sec">
+    <h2>Why Choose CodeStart?</h2>
+    <p>I have combined the most effective learning methods to help you learn faster and in a fun way!</p>
+    <div>
+        <div class="learn-method container">
+            <div class="row d-flex">
+                <div class="col learn-card">
+                    <h3>Structured Learning</h3>
+                    <p>CodeStart has lessons that are organised step by step, helping new learners understand core
+                        concepts without any prior coding experience.</p>
+                </div>
+                <div class="col learn-card">
+                    <h3>Progress Tracking</h3>
+                    <p>Easily track your progress as you learn. CodeStart shows which lessons you’ve completed and what
+                        to learn next, keeping beginners motivated and confident throughout their coding journey.</p>
+                </div>
+                <div class="col learn-card">
+                    <h3>Free access</h3>
+                    <p>Start learning to code for free. CodeStart provides beginner programming tracks at no cost,
+                        making it easy for anyone to take their first step into coding.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Available courses section (shows courses like html, css). Data will be loaded from the backend-->
+<section class="available-course">
+    <div>
+        <h2>Available Courses</h2>
+        <div>
+            <div class="row d-flex justify-content-center">
+                <!--Available course card-->
+                <div class="col-md-3 m-auto available-card" *ngFor="let course of courses; let i=index;">
+                    <img src="" alt="">
+                    <h4>{{course.title}}</h4>
+                    <p class="mt-4">{{course.description}}</p>
+                    <button (click)="startCourse(course._id)">Start learning</button>
+                </div>
+            </div>
+        </div>
+        <button routerLink="/course">View all courses</button>
+    </div>
+</section>
+
+<!--Sign up section: Encourages users to register-->
+<section class="signup">
+    <h3>Ready to start your journey?</h3>
+    <p>Sign up today and get access to all courses for free!</p>
+    <button type="button" routerLink="/signup">Sign up for free</button>
+</section>

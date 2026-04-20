@@ -47,7 +47,7 @@ export class Header implements OnInit {
       next: () => {
         this.authService.clearUser();
         window.alert('Logged out successfully')
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         console.error(err);

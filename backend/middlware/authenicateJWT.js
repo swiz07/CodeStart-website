@@ -7,9 +7,11 @@ const authenticateJWT = (req, res, next) => {
         return res.status(401).json({ status: "error", message: "No token found" })
     }
 
+    console.log("TOKEN:", token);
     let decoded;
     try {
         decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log("JWT_SECRET:", process.env.JWT_SECRET);
         //set user data to req.user
         req.user=decoded;
         next();

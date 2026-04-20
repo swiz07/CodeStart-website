@@ -1,3 +1,4 @@
+//logo styling
 .logo-text{
     color:#5946c6;
     font-size: 2rem;
@@ -12,10 +13,18 @@
     text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
 }
 
+
+//navigation links styling
 .navbar-links{
     font-family: sans-serif;
     font-weight: 700;
     font-size: 1.2rem;
+    margin: auto;
+}
+
+//styling for logout, login and signup buttons
+.right-nav-links{
+    margin-left: auto;
 }
 
 .right-nav-links .login{
@@ -49,6 +58,7 @@
     background-color: #7164c7;
 }
 
+//profile button and image styling
 .profile-btn{
     background: transparent;
     border:none;
@@ -70,4 +80,29 @@
 
 .profile-btn:hover .profile-pic{
     transform: scale(1.1);
+}
+
+
+//styles for smaller screens
+@media (max-width:768px) {
+    //styles for logo
+    .logo-text {
+        font-size: 1.5rem; 
+    }
+
+    //navbar styling
+    .navbar-links{
+        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /*right nav styling (login, signup, logoutss and profile)*/
+    .right-nav-links{
+        font-size: 1rem;
+        display: flex;
+        gap:10px;
+    }
+
 }

@@ -18,15 +18,19 @@ require('./config/dbConnection')
 const mongoose = require('mongoose');
 
 //routes
-const users=require('./routes/users')
-const courses=require('./routes/courses')
+const userRoutes=require('./routes/userRoutes')
+const courseRoutes=require('./routes/courseRoutes')
+const blogRoutes=require('./routes/blogRoutes')
 const authRoutes=require('./routes/authRoutes')
 const profileRoutes=require('./routes/profileRoutes')
+const lessonRoutes=require('./routes/lessonRoutes')
 
-app.use('/api/', users);
+app.use('/api/', userRoutes);
 app.use('/api/auth', authRoutes)
-app.use('/api/courses', courses)
+app.use('/api/courses', courseRoutes)
 app.use('/api/profile', profileRoutes)
+app.use('/api/lessons', lessonRoutes);
+app.use('/api/blogs', blogRoutes) 
 
 //start server
 app.listen(PORT, (err)=>{

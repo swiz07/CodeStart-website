@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 //get user
 exports.getUsers = async (req, res) => {
     try {
-        const users = await User.find({});
+        const users = await User.find({}).select('-password');
         res.status(200).json(users);
     }
     catch (err) {
@@ -33,7 +33,7 @@ exports.createUsers = async (req, res) => {
             email,
             password: hashedPassword,
             profile_pic,
-            role,
+            role:'user',
             bio,
             isActive
         })
@@ -100,7 +100,7 @@ exports.deleteUser = async (req, res) => {
 
 exports.getUserById=async(req, res)=>{
     try{
-        const user=await User.findById(req.params.id);
+        const user=await User.findById(req.params.id).select('-password');
         if(!user){
             return res.status(404).json({message:"User not found"});
         }
@@ -110,3 +110,19 @@ exports.getUserById=async(req, res)=>{
         res.status(500).json({message:"Internal error"})
     }
 }
+
+//gets current user
+exports.getCurrentUser= async(req, res)=>{
+    try{
+        const user=await User.findById(req.user.id).select("-password");
+
+        if(!user){
+            return res.status(404).json({status:"error", message:"User not found"});
+        }
+
+        return res.status(200).json({status:"Success", data:user})
+    }catch(error){
+        console.error("Error", error);
+        return res.status(500).json({message:"Server error"})
+    }
+};

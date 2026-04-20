@@ -1,8 +1,10 @@
+//custom properties for text and background colors
 :host{
     --text-color:white;
     --background-color:rgba(0, 0, 0, 0.751);
 }
 
+//adds styles to all elements 
 *{
     margin: 0;
     border: 0;
@@ -10,6 +12,7 @@
 }
 
 
+//styles for footer
 .footer, .footer a{
     color: var(--text-color);
 }
@@ -18,7 +21,16 @@
     background-color: var(--background-color);
 }
 
+//hover effect for footer 
 .footer .nav-link:hover{
     color: rgba(255, 255, 255, 0.646);
 }
 
+//styles for smaller screens
+@media (max-width:768px) {
+    //footer styling
+    .footer a, .footer p{
+        font-size: 12px;
+    }
+    
+}

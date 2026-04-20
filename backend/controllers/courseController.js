@@ -16,7 +16,7 @@ exports.getCourses = async (req, res) => {
 //create course
 exports.createCourses = async (req, res) => {
     try {
-        const { title, course_image, description, category, language, difficulty_level, course_duration, students_enrolled } = req.body;
+        const { title, course_image, description, category, language, difficulty_level, course_duration } = req.body;
         //checks if the fields are empty 
         if (!title || !description || !category || !course_duration) {
             return res.status(400).json({ message: "Required fields missing" })
@@ -36,11 +36,10 @@ exports.createCourses = async (req, res) => {
             category,
             language,
             difficulty_level,
-            course_duration,
-            students_enrolled
+            course_duration
         })
         await newCourse.save();
-        res.status(201).json({ msg: 'Course created successfully' })
+        res.status(201).json({ msg: 'Course created successfully', course:newCourse })
     }
     catch (err) {
         res.status(500).json({ msg: 'Internal Server Error!' })
@@ -76,7 +75,7 @@ exports.deleteCourse = async (req, res) => {
         if (!deleted) {
             return res.status(404).json({ msg: "Course not found" });
         }
-        res.status(200).json({ msg: 'Course deleted successfully', result })
+        res.status(200).json({ msg: 'Course deleted successfully', deleted })
     }
     catch (err) {
         res.status(500).json({ msg: 'Internal Server Error!' })
@@ -87,18 +86,17 @@ exports.deleteCourse = async (req, res) => {
 exports.getCourseById = async (req, res) => {
     try {
         const course = await Course.findById(req.params.id)
-            .populate({
-                path: 'lessons',
-                options: { sort: { order: 1 } }
-            })
+            .populate('lessons')
             .populate('quizzes');
+
 
         if (!course) {
             return res.status(404).json({ message: 'Course not found' })
         }
+        console.log('Populated: ', course.lessons)
         res.status(200).json(course);
     } catch (error) {
-        res.status(500).json({ message: 'Internal Server error!' });
+        res.status(500).json({ message: error.message});
     }
 }
 
@@ -130,9 +128,9 @@ exports.addLesson = async (req, res) => {
 
         //attach lesson to course
         existingCourse.lessons.push(lesson._id);
-        await course.save()
+        await existingCourse.save()
 
-        res.status(201).json({ msg: 'Lesson added successfully', lesson, course })
+        res.status(201).json({ msg: 'Lesson added successfully', lesson, existingCourse })
     }
     catch (err) {
         res.status(500).json({ msg: 'Internal Server Error!' })
@@ -166,9 +164,9 @@ exports.addQuiz = async (req, res) => {
 
         //attach quiz to course
         existingCourse.quizzes.push(quiz._id);
-        await course.save()
+        await existingCourse.save()
         
-        res.status(201).json({ msg: 'Quiz added successfully', quiz, course })
+        res.status(201).json({ msg: 'Quiz added successfully', quiz, course: existingCourse })
     }
     catch (err) {
         res.status(500).json({ msg: 'Internal Server Error!' })

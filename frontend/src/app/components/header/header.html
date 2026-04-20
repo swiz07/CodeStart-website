@@ -10,7 +10,7 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!--Main navigation links-->
-        <div class="navbar-links mx-auto">
+        <div class="navbar-links">
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link me-lg-4 active" routerLink="/">Home</a>
@@ -30,16 +30,16 @@
           </ul>
         </div>
 
-        <!--Right aligned nav links for login & signup-->
+        <!--Right aligned nav links-->
         <div class="d-flex right-nav-links">
-          <!--show login & signup only if Not logged in-->
+          <!--show login & signup only if user is not logged in-->
           <button *ngIf="!isLoggedIn" class="btn me-lg-4 login" routerLink="/login">Login</button>
           <button *ngIf="!isLoggedIn" class="btn signup" routerLink="/signup">Signup</button>
 
           <!--show logout if logged in-->
           <button *ngIf="isLoggedIn" (click)="logout()" class="btn me-lg-4 logout">Logout </button>
 
-          <!--profile btn with pic-->
+          <!--profile btn with pic, visible when the user is logged in-->
           <button *ngIf="isLoggedIn" (click)="goProfile()" class="profile-btn">
             <img src="assets/images/user.png" alt="Profile" class="profile-pic"/>
           </button>

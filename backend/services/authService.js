@@ -1,8 +1,6 @@
 const User = require('../models/users')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const express=require('express')
-const app=express();
 
 const JWT_SECRET = process.env.JWT_SECRET
 
@@ -18,11 +16,14 @@ exports.signup = async (data) => {
         throw new Error('Email already exists');
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10); //hashes the password
+
+    //creates new user
     const user = new User({
         full_name,
         email,
         password: hashedPassword,
+        role:'user' //default
     })
 
     await user.save();
@@ -33,57 +34,42 @@ exports.signup = async (data) => {
 exports.login = async (data) => {
     const { email, password } = data
 
+    //check if the fields are empty
     if (!email || !password) {
         throw new Error('All fields are required')
     }
 
-    const existingUser = await User.findOne({ email })
-    if (!existingUser) {
-        throw new Error ('User does not exists' )
+    const user = await User.findOne({ email })
+    if (!user) {
+        throw new Error ('Invalid email or password' )
     }
 
-    const isMatch = await bcrypt.compare(password, existingUser.password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
         throw new Error('Invalid credentials' )
     }
         const token = jwt.sign(
             {
-                id: existingUser._id,
-                email: existingUser.email
+                id: user._id,
+                email: user.email,
+                role: user.role
             },
             JWT_SECRET,
-            {expiresIn:'1h'}
+            {expiresIn:'1d'}
         );
 
         return{
             status:"Success",
             existingUser:{
-                id:existingUser._id,
-                full_name:existingUser.full_name,
-                role:existingUser.role
+                id:user._id,
+                full_name:user.full_name,
+                role:user.role
             },
             token
         };
 };
 
 
-app.get("/api/user", async(req, res)=>{
-    try{
-        const token = req.cookies.token;
-        if(!token){
-            return res.status(401).json({status:"error", message:"No token found"})
-        }
-        const decoded =jwt.verify(token, JWT_SECRET);
-        const user=await User.findById(decoded.id).select("-password");
-        if(!user){
-            return res.status(404).json({status:"error", message:"User not found"});
-        }
-        return res.status(200).json({status:"Success", data:user})
-    }catch(error){
-        console.error("Error", error);
-        return res.status(500).json({message:"Server error"})
-    }
-})
 
 
 
