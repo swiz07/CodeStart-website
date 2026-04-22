@@ -1,28 +1,27 @@
-const express=require('express');
-const router=express.Router();
+const express = require('express');
+const router = express.Router();
 const coursesController = require('../controllers/courseController');
-const authenticateJWT=require('../middlware/authenicateJWT');
-const authoriseRoles=require('../middlware/authoriserole');
 
-//courses
+// ================= COURSES =================
 
-//get all courses
+// Get all courses (public)
 router.get("/", coursesController.getCourses);
 
-//get a single course by id
+// Get single course by id (public)
 router.get("/:id", coursesController.getCourseById);
 
-//create a new course
+// Create a new course (public for demo)
 router.post("/", coursesController.createCourses);
 
-//update a course
+// Update a course (public for demo)
 router.put("/:id", coursesController.updateCourse);
 
-//delete a course
+// Delete a course (public for demo)
 router.delete("/:id", coursesController.deleteCourse);
 
-//lessons:
-//add a lesson to a course
-router.post("/:id/lessons", coursesController.addLesson)
+// ================= LESSONS =================
 
-module.exports=router;
+// Add lesson to a course (public for demo)
+router.post("/:id/lessons", coursesController.addLesson);
+
+module.exports = router;

@@ -1,15 +1,28 @@
 <div *ngIf="loading" class="text-center my-4">
-    Loading blog...
+  <!-- Only show loading spinner when the content is actually loading -->
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
   </div>
-  
-  <div *ngIf="!loading && blog" class="ms-4">
-    <h1>{{ blog.title }}</h1>
-    <p class="text-muted">Category: {{ blog.category }}</p>
-    <img [src]="blog.coverImage" class="img-fluid mb-3">
-    <p>{{ blog.content }}</p>
+</div>
 
+<div *ngIf="!loading && blog" class="container mt-5">
+  <!-- Blog content -->
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="display-4 text-center mb-4">{{ blog.title }}</h1>
+      <p class="text-muted text-center mb-4">Category: {{ blog.category }}</p>
+      <div class="text-center mb-4">
+        <img [src]="blog.coverImage" class="img-fluid rounded" alt="Blog Cover">
+      </div>
+      <p class="lead">{{
+        blog.content
+      }}</p>
+    </div>
   </div>
-  
-  <div *ngIf="!loading && !blog">
-    <p>Blog not found.</p>
+</div>
+
+<div *ngIf="!loading && !blog" class="container mt-5">
+  <div class="alert alert-warning text-center" role="alert">
+    Blog not found.
   </div>
+</div>
