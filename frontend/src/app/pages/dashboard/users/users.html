@@ -1,0 +1,46 @@
+<div class="container-fluid p-3">
+
+    <div class="row">
+      <div class="col-xl-12">
+        <button class="btn btn-primary float-end">+ Create New</button>
+      </div>
+  
+      <div class="col-xl-12 mt-3">
+  
+        <table class="table table-striped">
+  
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Active</th>
+              <th>Date joined</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr *ngFor="let user of user$ | async; let i = index">
+  
+              <td>{{ i + 1 }}</td>
+              <td>{{ user.fullName }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.role }}</td>
+              <td>
+                <span [class.text-success]="user.isActive"
+                      [class.text-danger]="!user.isActive">
+                  {{ user.isActive ? 'Active' : 'Inactive' }}
+                </span>
+              </td>
+              <td>{{ user.createdAt }}</td>
+  
+            </tr>
+          </tbody>
+  
+        </table>
+  
+      </div>
+    </div>
+  
+  </div>

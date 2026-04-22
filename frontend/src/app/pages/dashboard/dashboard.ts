@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
+ constructor(private change: ChangeDetectorRef){
 
+ }
 }

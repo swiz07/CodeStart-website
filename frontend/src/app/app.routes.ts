@@ -12,6 +12,8 @@ import { CourseDetail } from './pages/course-detail/course-detail';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Lesson } from './pages/lesson/lesson';
 import { BlogDetail } from './pages/blog-detail/blog-detail';
+import { Users } from './pages/dashboard/users/users';
+import { Courses } from './pages/dashboard/courses/courses';
 
 export const routes: Routes = [
   // Redirect to home on empty path
@@ -37,6 +39,9 @@ export const routes: Routes = [
   // Protected route, use authGuard for authentication check
   { path: 'profile', component: Profile, canActivate: [authGuard] },
   { path: 'dashboard', component: Dashboard, canActivate: [authGuard] },
+  { path: 'dashboard', component: Dashboard, canActivate: [authGuard] },
+  { path: 'dashboard/users', component: Users, canActivate: [authGuard] },
+  { path: 'dashboard/courses', component: Courses, canActivate: [authGuard] },
 
   // Wildcard route 
   { path: '**', redirectTo: '/home' } 

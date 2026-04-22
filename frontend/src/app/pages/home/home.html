@@ -76,7 +76,7 @@
 </section>
 
 <!--Sign up section: Encourages users to register-->
-<section class="signup">
+<section class="signup"  *ngIf="!isLoggedIn">
     <h3>Ready to start your journey?</h3>
     <p>Sign up today and get access to all courses for free!</p>
     <button type="button" routerLink="/signup">Sign up for free</button>

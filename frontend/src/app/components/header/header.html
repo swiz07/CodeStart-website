@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <!--logo on the left side-->
-      <a class="logo-text navbar-brand" routerLink="/">CodeStart</a>
+      <a class="logo-text navbar-brand" [routerLink]="user?.role === 'admin' ? '/dashboard' : '/'">CodeStart</a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
@@ -12,22 +12,37 @@
         <!--Main navigation links-->
         <div class="navbar-links">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link me-lg-4 active" routerLink="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-lg-4" routerLink="/course">Courses</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link me-lg-4" routerLink="/blog">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a class="me-lg-4 nav-link" routerLink="/contact">Contact</a>
-            </li>
-            <li class="nav-item" *ngIf="isLoggedIn">
-              <a class="me-lg-4 nav-link" routerLink="/dashboard">Dashboard</a>
-            </li>
+            <!-- user nav -->
+            <ng-container *ngIf="user?.role !== 'admin'">
+              <li class="nav-item">
+                <a class="nav-link me-lg-4 active" routerLink="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-lg-4" routerLink="/course">Courses</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link me-lg-4" routerLink="/blog">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="me-lg-4 nav-link" routerLink="/contact">Contact</a>
+              </li>
+            </ng-container>
+
+            <!-- admin nav -->
+            <ng-container *ngIf="isLoggedIn && user?.role === 'admin'">
+              <li class="nav-item">
+                <a class="me-lg-4 nav-link" routerLink="/dashboard/courses">Courses</a>
+              </li>
+              <li class="nav-item">
+                <a class="me-lg-4 nav-link" routerLink="/dashboard/users">Users</a>
+              </li>
+              <li class="nav-item">
+                <a class="me-lg-4 nav-link" routerLink="/dashboard">Dashboard</a>
+              </li>
+            </ng-container>
+
           </ul>
+
         </div>
 
         <!--Right aligned nav links-->
@@ -41,7 +56,7 @@
 
           <!--profile btn with pic, visible when the user is logged in-->
           <button *ngIf="isLoggedIn" (click)="goProfile()" class="profile-btn">
-            <img src="assets/images/user.png" alt="Profile" class="profile-pic"/>
+            <img src="assets/images/user.png" alt="Profile" class="profile-pic" />
           </button>
         </div>
       </div>
